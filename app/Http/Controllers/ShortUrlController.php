@@ -18,11 +18,22 @@ class ShortUrlController extends Controller
     {
         $request->validate([
             'original_url' => 'required|url',
+            'custom_slug' => [
+                'nullable',
+                'alpha_dash',
+                'min:3',
+                'max:30',
+                'unique:short_urls,short_code',
+            ],
         ]);
 
-        $shortCode = Str::random(6);
-        while (ShortUrl::where('short_code', $shortCode)->exists()) {
+        if ($request->filled('custom_slug')) {
+            $shortCode = $request->custom_slug;
+        } else {
             $shortCode = Str::random(6);
+            while (ShortUrl::where('short_code', $shortCode)->exists()) {
+                $shortCode = Str::random(6);
+            }
         }
 
         $shortUrl = ShortUrl::create([
