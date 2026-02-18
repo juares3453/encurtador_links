@@ -16,8 +16,8 @@
             <input type="url" class="form-control" id="original_url" name="original_url" required placeholder="https://exemplo.com">
         </div>
         <div class="mb-3">
-            <label for="custom_slug" class="form-label">Slug personalizado (opcional)</label>
-            <input type="text" class="form-control" id="custom_slug" name="custom_slug" placeholder="ex: meulink">
+            <label for="custom_slug" class="form-label">Slug personalizado -  (opcional)</label>
+            <input type="text" class="form-control" id="custom_slug" name="custom_slug" placeholder="ex: links.lunetear.com.br/slugpersonalizado">
         </div>
         <button type="submit" class="btn btn-primary">Encurtar</button>
     </form>
