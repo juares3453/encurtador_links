@@ -9,9 +9,21 @@ use Illuminate\Support\Str;
 
 class ShortUrlController extends Controller
 {
+    public function listagem()
+    {
+        $shortUrls = ShortUrl::orderByDesc('created_at')->get();
+        return view('lista_links', compact('shortUrls'));
+    }
     public function index()
     {
-        return view('shortener');
+        $shortUrls = ShortUrl::orderByDesc('created_at')->get();
+        return view('shortener', compact('shortUrls'));
+    }
+    public function destroy($id)
+    {
+        $shortUrl = ShortUrl::findOrFail($id);
+        $shortUrl->delete();
+        return redirect()->route('home')->with('success', 'Link excluído com sucesso!');
     }
 
     public function store(Request $request)
@@ -41,9 +53,7 @@ class ShortUrlController extends Controller
             'short_code' => $shortCode,
         ]);
 
-        return view('shortener', [
-            'shortUrl' => $shortUrl,
-        ]);
+        return redirect()->route('home')->with('shortUrl', $shortUrl);
     }
 
     public function redirect($short_code)
