@@ -1,6 +1,12 @@
-@extends('layouts.app')
-
-@section('content')
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Links Encurtados</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
 <div class="container py-5">
     <h1 class="mb-4">Links Encurtados</h1>
     @if(session('success'))
@@ -47,4 +53,5 @@
     @endif
     <a href="{{ route('home') }}" class="btn btn-secondary mt-4">Voltar</a>
 </div>
-@endsection
+</body>
+</html>
