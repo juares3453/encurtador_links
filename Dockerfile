@@ -3,9 +3,9 @@ FROM php:8.3-fpm
 
 # Instala dependências do sistema
 RUN apt-get update && \
-    apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git unzip && \
+    apt-get install -y libpng-dev libjpeg-dev libfreetype6-dev zip git unzip libpq-dev && \
     docker-php-ext-configure gd --with-freetype --with-jpeg && \
-    docker-php-ext-install gd
+    docker-php-ext-install gd pdo_pgsql
 
 # Instala Composer
 COPY --from=composer:2.7 /usr/bin/composer /usr/bin/composer
