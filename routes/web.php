@@ -8,11 +8,11 @@ use App\Http\Controllers\LoginController;
 
 use App\Http\Controllers\UserController;
 
+
 Route::get('/', [ShortUrlController::class, 'index'])->name('home');
 Route::delete('/short-url/{id}', [ShortUrlController::class, 'destroy'])->name('short-url.destroy');
 Route::post('/encurtar', [ShortUrlController::class, 'store'])->name('encurtar');
 Route::get('/links', [ShortUrlController::class, 'listagem'])->name('links.listagem');
-Route::get('/{short_code}', [ShortUrlController::class, 'redirect'])->name('redirect');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);
@@ -25,3 +25,5 @@ Route::middleware('auth')->group(function () {
 	Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
 	Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 });
+
+Route::get('/{short_code}', [ShortUrlController::class, 'redirect'])->name('redirect');
