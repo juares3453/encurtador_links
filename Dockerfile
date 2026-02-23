@@ -20,5 +20,5 @@ RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 # Permissões
 RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
 
-EXPOSE 9000
-CMD ["php-fpm"]
+EXPOSE 8080
+CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
