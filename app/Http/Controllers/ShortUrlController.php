@@ -13,8 +13,16 @@ class ShortUrlController extends Controller
     {
         $shortUrl = ShortUrl::where('short_code', $short_code)->firstOrFail();
         $url = url('/' . $shortUrl->short_code);
-        $qr = new QrCode($url);
-        $qr->setSize(250);
+        $qr = new QrCode(
+            $url,
+            new \Endroid\QrCode\Encoding\Encoding('UTF-8'),
+            \Endroid\QrCode\ErrorCorrectionLevel::Low,
+            250,
+            10,
+            \Endroid\QrCode\RoundBlockSizeMode::Margin,
+            new \Endroid\QrCode\Color\Color(0, 0, 0),
+            new \Endroid\QrCode\Color\Color(255, 255, 255)
+        );
         $writer = new PngWriter();
         $result = $writer->write($qr);
         return response($result->getString(), 200)
