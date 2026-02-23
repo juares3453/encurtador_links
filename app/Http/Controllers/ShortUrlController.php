@@ -27,6 +27,11 @@ class ShortUrlController extends Controller
 
     public function store(Request $request)
     {
+        \Log::info('Tentando encurtar link', [
+            'original_url' => $request->original_url,
+            'custom_slug' => $request->custom_slug,
+        ]);
+
         $request->validate([
             'original_url' => 'required|url',
             'custom_slug' => [
@@ -47,10 +52,24 @@ class ShortUrlController extends Controller
             }
         }
 
-        $shortUrl = ShortUrl::create([
-            'original_url' => $request->original_url,
-            'short_code' => $shortCode,
-        ]);
+        try {
+            $shortUrl = ShortUrl::create([
+                'original_url' => $request->original_url,
+                'short_code' => $shortCode,
+            ]);
+            \Log::info('Link encurtado salvo com sucesso', [
+                'id' => $shortUrl->id,
+                'short_code' => $shortUrl->short_code,
+                'original_url' => $shortUrl->original_url,
+            ]);
+        } catch (\Exception $e) {
+            \Log::error('Erro ao salvar link encurtado', [
+                'message' => $e->getMessage(),
+                'original_url' => $request->original_url,
+                'short_code' => $shortCode,
+            ]);
+            return redirect()->route('home')->with('error', 'Erro ao encurtar link.');
+        }
 
         return redirect()->route('home')->with('shortUrl', $shortUrl);
     }
