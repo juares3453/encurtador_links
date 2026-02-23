@@ -13,6 +13,7 @@ Route::get('/', [ShortUrlController::class, 'index'])->name('home');
 Route::delete('/short-url/{id}', [ShortUrlController::class, 'destroy'])->name('short-url.destroy');
 Route::post('/encurtar', [ShortUrlController::class, 'store'])->name('encurtar');
 Route::get('/links', [ShortUrlController::class, 'listagem'])->name('links.listagem');
+Route::get('/qrcode/{short_code}', [ShortUrlController::class, 'qrcode'])->name('shorturl.qrcode');
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [LoginController::class, 'login']);

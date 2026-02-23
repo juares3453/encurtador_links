@@ -30,6 +30,7 @@
                             <th>Encurtado</th>
                             <th>Acessos</th>
                             <th>Criado em</th>
+                            <th>QR Code</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
@@ -41,6 +42,9 @@
                             <td><a href="{{ url($url->short_code) }}" target="_blank">{{ url($url->short_code) }}</a></td>
                             <td>{{ $url->access_count }}</td>
                             <td>{{ $url->created_at->format('d/m/Y H:i') }}</td>
+                            <td>
+                                <a href="{{ route('shorturl.qrcode', $url->short_code) }}" target="_blank" class="btn btn-outline-dark btn-sm">Ver QR</a>
+                            </td>
                             <td>
                                 <form action="{{ route('short-url.destroy', $url->id) }}" method="POST" onsubmit="return confirm('Tem certeza que deseja excluir este link?');">
                                     @csrf

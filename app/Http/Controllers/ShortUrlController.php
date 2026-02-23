@@ -1,3 +1,5 @@
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 <?php
 
 namespace App\Http\Controllers;
@@ -7,6 +9,18 @@ use App\Models\ShortUrl;
 use Illuminate\Support\Str;
 
 class ShortUrlController extends Controller
+
+    public function qrcode($short_code)
+    {
+        $shortUrl = ShortUrl::where('short_code', $short_code)->firstOrFail();
+        $url = url('/' . $shortUrl->short_code);
+        $qr = new QrCode($url);
+        $qr->setSize(250);
+        $writer = new PngWriter();
+        $result = $writer->write($qr);
+        return response($result->getString(), 200)
+            ->header('Content-Type', $result->getMimeType());
+    }
 {
     public function __construct()
     {
