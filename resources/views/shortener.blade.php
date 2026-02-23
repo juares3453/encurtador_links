@@ -12,6 +12,10 @@
             <a href="{{ route('links.listagem') }}" class="btn btn-outline-secondary">Ver todos os links</a>
             @auth
                 <a href="{{ route('users.index') }}" class="btn btn-outline-primary">Gerenciar Usuários</a>
+                <form method="POST" action="{{ route('logout') }}" style="display:inline;">
+                    @csrf
+                    <button type="submit" class="btn btn-outline-danger ms-2">Logout</button>
+                </form>
             @endauth
         </div>
     <h1 class="mb-4">O Encurtador de Links</h1>
