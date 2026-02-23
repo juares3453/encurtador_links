@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Encurtador de Links</title>
+    <title>O Encurtador de Links</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body class="bg-light">
@@ -11,7 +11,7 @@
         <div class="mb-4 text-end">
             <a href="{{ route('links.listagem') }}" class="btn btn-outline-secondary">Ver todos os links</a>
         </div>
-    <h1 class="mb-4">Encurtador de Links</h1>
+    <h1 class="mb-4">O Encurtador de Links</h1>
     <form method="POST" action="{{ route('encurtar') }}" class="mb-4">
         @csrf
         <div class="mb-3">
