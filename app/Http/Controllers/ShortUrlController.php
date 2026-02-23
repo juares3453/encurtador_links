@@ -1,15 +1,14 @@
-use Endroid\QrCode\QrCode;
-use Endroid\QrCode\Writer\PngWriter;
 <?php
-
 namespace App\Http\Controllers;
 
+use Endroid\QrCode\QrCode;
+use Endroid\QrCode\Writer\PngWriter;
 use Illuminate\Http\Request;
 use App\Models\ShortUrl;
 use Illuminate\Support\Str;
 
 class ShortUrlController extends Controller
-
+{
     public function qrcode($short_code)
     {
         $shortUrl = ShortUrl::where('short_code', $short_code)->firstOrFail();
@@ -21,7 +20,6 @@ class ShortUrlController extends Controller
         return response($result->getString(), 200)
             ->header('Content-Type', $result->getMimeType());
     }
-{
     public function __construct()
     {
         $this->middleware('auth')->except(['redirect']);
