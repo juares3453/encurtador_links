@@ -18,7 +18,10 @@ COPY . .
 RUN composer install --no-interaction --prefer-dist --optimize-autoloader
 
 # Permissões
-RUN chown -R www-data:www-data /var/www && chmod -R 755 /var/www
+RUN chown -R www-data:www-data /var/www && \
+    chmod -R 755 /var/www && \
+    chmod -R 775 storage bootstrap/cache
 
 EXPOSE 8080
-CMD ["php", "artisan", "serve", "--host=0.0.0.0", "--port=8080"]
+# Entrypoint para rodar migrations e iniciar o servidor
+ENTRYPOINT ["sh", "-c", "php artisan migrate --force && php artisan serve --host=0.0.0.0 --port=8080"]
