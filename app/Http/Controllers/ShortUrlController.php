@@ -10,8 +10,7 @@ class ShortUrlController extends Controller
 {
     public function __construct()
     {
-        parent::__construct();
-        $this->middleware('auth', ['except' => ['redirect']]);
+        $this->middleware('auth')->except(['redirect']);
     }
     public function listagem()
     {
