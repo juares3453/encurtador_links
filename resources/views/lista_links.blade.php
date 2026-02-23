@@ -8,6 +8,12 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
+    <div class="mb-4 d-flex justify-content-end gap-2">
+        <a href="{{ route('home') }}" class="btn btn-outline-secondary">Encurtar novo link</a>
+        @auth
+            <a href="{{ route('users.index') }}" class="btn btn-outline-primary">Gerenciar Usuários</a>
+        @endauth
+    </div>
     <h1 class="mb-4">Links Encurtados</h1>
     @if(session('success'))
         <div class="alert alert-success">{{ session('success') }}</div>

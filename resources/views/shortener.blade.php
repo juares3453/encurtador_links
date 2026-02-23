@@ -8,8 +8,11 @@
 </head>
 <body class="bg-light">
 <div class="container py-5">
-        <div class="mb-4 text-end">
+        <div class="mb-4 d-flex justify-content-end gap-2">
             <a href="{{ route('links.listagem') }}" class="btn btn-outline-secondary">Ver todos os links</a>
+            @auth
+                <a href="{{ route('users.index') }}" class="btn btn-outline-primary">Gerenciar Usuários</a>
+            @endauth
         </div>
     <h1 class="mb-4">O Encurtador de Links</h1>
     <form method="POST" action="{{ route('encurtar') }}" class="mb-4">
